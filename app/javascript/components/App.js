@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -10,29 +10,27 @@ import NotFound from './pages/NotFound'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Routes
 } from 'react-router-dom'
 
-class App extends Component {
-  render() {
+export default function App(props) {
+
     return (
       
         <Router>
-          <Header {...this.props} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/apartmentindex" component={ApartmentIndex} />
-            <Route path="/apartmentshow" component={ApartmentShow} />
-            <Route path="/apartmentnew" component={ApartmentNew} />
-            <Route path="/apartmentedit" component={ApartmentEdit} />
-            <Route component={NotFound}/>
-          </Switch>
+          <Header {...props} />
+          <Routes>
+            <Route exact path="/" element={<Home/>} />
+            <Route path="/apartmentindex" element={<ApartmentIndex/>} />
+            <Route path="/apartmentshow" element={<ApartmentShow/>} />
+            <Route path="/apartmentnew" element={<ApartmentNew/>} />
+            <Route path="/apartmentedit" element={<ApartmentEdit/>} />
+            <Route element={<NotFound/>}/>
+          </Routes>
+          <Footer/>
         </Router>
         
         
   
     )
-  }
 }
-
-export default App

@@ -1,3 +1,47 @@
+# Initial Setup for project
+
+```bash
+$ bundle 
+$ yarn
+$ rails db:setup
+$ rails generate devise:views
+$ yarn remove react-router-dom
+$ yarn add react-router-dom
+$ yarn add react-bootstrap
+```
+Change class components into functional. Use rfc to speed up the process.
+
+## app/javascript/components/App.js
+Change switch import to routes on App.js
+Change component to element and add </> around each component reference to make it a component call
+Change this.props to props
+
+## app/javascript/components/components/Header.js
+Change Header component to reflect functional component changes.
+Remove render
+Remove { Component } import
+
+
+```bash
+$ rails generate scaffold Apartment street:string city:string state:string manager:string email:string price:string bedrooms:integer bathrooms:integer pets:string image:text user_id:integer --api
+$ rails db:migrate
+```
+Create associations between user and apartments model
+> /app/models/user.rb
+> /app/models/apartment.rb
+Comment out code inside apartment controller methods for now.
+> app/controllers/apartments_controller.rb
+
+
+```bash
+$ rails s
+cmd + t
+$ ./bin/webpack-dev-server
+```
+
+
+
+
 # Apartment App
 This app has been created for you to mimic the feeling of entering into a developer role where there is established code that you have not created. This Apartment application has a few features that have been created for you and some key items that have been left totally untouched. Part of your job as a developer is to be able to pick up code that has already been created, understand what is going on with it, and continue the development of that code. 
 
@@ -101,9 +145,16 @@ yarn add reactstrap
 Once you're able to clone the repository, within the root of the project directory, run:
 
 ```bash
-bundle 
-yarn
-rails db:setup
+$ bundle 
+$ yarn
+$ rails db:setup
+$ rails s
+cmd + t
+$ ./bin/webpack-dev-server
+
+$ yarn remove react-router-dom
+$ yarn add react-router-dom
+$ yarn add react-bootstrap
 ```
 
 ## 🏁 Start the App
@@ -119,7 +170,7 @@ See what is available already in the application.
 The Devise User model is going to have an association with the Apartment model. In this situation, the User will have many apartments and the Apartments will belong to a User.
 
 ```bash
-rails generate resource Apartment street:string city:string state:string manager:string email:string price:string bedrooms:integer bathrooms:integer pets:string image:text user_id:integer
+rails generate scaffold Apartment street:string city:string state:string manager:string email:string price:string bedrooms:integer bathrooms:integer pets:string image:text user_id:integer --api
 rails db:migrate
 ```
 
