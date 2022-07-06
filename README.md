@@ -1,5 +1,5 @@
-# Initial Setup for project
-
+# Environment Setup
+## Initial Setup for project
 ```bash
 $ bundle 
 $ yarn
@@ -11,17 +11,14 @@ $ yarn add react-bootstrap
 ```
 Change class components into functional. Use rfc to speed up the process.
 
-## app/javascript/components/App.js
+### app/javascript/components/App.js
 Change switch import to routes on App.js
 Change component to element and add </> around each component reference to make it a component call
 Change this.props to props
-
-## app/javascript/components/components/Header.js
+### app/javascript/components/components/Header.js
 Change Header component to reflect functional component changes.
 Remove render
 Remove { Component } import
-
-
 ```bash
 $ rails generate scaffold Apartment street:string city:string state:string manager:string email:string price:string bedrooms:integer bathrooms:integer pets:string image:text user_id:integer --api
 $ rails db:migrate
@@ -32,12 +29,15 @@ Create associations between user and apartments model
 Comment out code inside apartment controller methods for now.
 > app/controllers/apartments_controller.rb
 
-
 ```bash
 $ rails s
 cmd + t
 $ ./bin/webpack-dev-server
 ```
+
+# Home
+
+# Index - unprotected
 
 
 
