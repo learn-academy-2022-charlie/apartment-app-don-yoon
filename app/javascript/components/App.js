@@ -28,7 +28,7 @@ useEffect(() => {
   readApartments()
 },[])
 
-console.log("wtf:", apartments)
+
     return (     
         <Router>
           <Header {...props} />

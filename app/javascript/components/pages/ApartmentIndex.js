@@ -10,7 +10,7 @@ export default function ApartmentIndex(props) {
       {
       apartments && apartments.map((apartmentObj, index) => {
         return(
-        <Card key={index} style={{ width: '18rem' }}>
+        <Card id="indexCard" key={index} style={{ width: '18rem' }}>
           <Card.Img variant="top" src={apartmentObj.image} />
           <Card.Body>
             <Card.Title> {apartmentObj.street}, {apartmentObj.city}, {apartmentObj.state} </Card.Title>

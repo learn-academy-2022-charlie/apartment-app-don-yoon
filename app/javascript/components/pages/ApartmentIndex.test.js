@@ -47,7 +47,7 @@ describe("When ApartmentIndex renders", () => {
   }
   let apartmentIndexRender;
   beforeEach(() => {
-    apartmentIndexRender = shallow(<ApartmentIndex {...props}/>)
+    apartmentIndexRender = shallow(<ApartmentIndex apartments={props}/>)
   }
   )
   it("displays a heading", () => {
@@ -55,7 +55,7 @@ describe("When ApartmentIndex renders", () => {
     expect(apartmentIndexHeading.text()).toEqual("Apartment Index")
   })
   it("displays the same number of cards as apartments in the database", () => {
-    const apartmentCards = apartmentIndexRender.find("Card")
+    const apartmentCards = apartmentIndexRender.find('[id="indexCard"]')
     expect(apartmentCards.length).toEqual(2)
   })
 })

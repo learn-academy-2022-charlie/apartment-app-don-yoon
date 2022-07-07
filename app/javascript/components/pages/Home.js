@@ -5,6 +5,7 @@ export default function Home() {
     <>
       <h1> Home </h1>
       <p> PUT WHAT APP DOES HERE </p>
+      <p> MAKE PRETTY CSS STUFF HERE LATER </p>
     </>
   )
 }

@@ -38,7 +38,11 @@ $ ./bin/webpack-dev-server
 # Home
 
 # Index - unprotected
+create the fetch request, unlike cat-tinder where we had to use localhost, this monolithic app lets us route using just /apartments in the fetch request.
 
+```javascript
+
+```
 
 
 
