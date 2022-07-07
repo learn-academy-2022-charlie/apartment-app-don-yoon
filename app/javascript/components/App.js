@@ -20,25 +20,27 @@ let [apartments, setApartments] = useState([])
 function readApartments () {
   fetch("/apartments")
   .then(request => request.json())
-  .then(payload => setApartments({apartments: payload}))
+  .then(payload => setApartments(payload))
   .catch(err => console.log(err))
 }
-
 useEffect(() => {
   readApartments()
 },[])
 
+
 return (
         <Router>
-          <Header {...props} />
+          <Header {...props} apartments={apartments} />
+          <div className='app-container'>
             <Routes>
               <Route exact path="/" element={<Home/>} />
               <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
-              <Route path="/apartmentshow" element={<ApartmentShow/>} />
+              <Route path="/apartmentshow/:id" element={<ApartmentShow {...props}/>} />
               <Route path="/apartmentnew" element={<ApartmentNew/>} />
-              <Route path="/apartmentedit" element={<ApartmentEdit/>} />
+              <Route path="/apartmentedit/:id" element={<ApartmentEdit/>} />
               <Route element={<NotFound/>} />
             </Routes>
+          </div>
           <Footer/>
         </Router>
     )

@@ -40,12 +40,53 @@ $ ./bin/webpack-dev-server
 # Index - unprotected
 create the fetch request, unlike cat-tinder where we had to use localhost, this monolithic app lets us route using just /apartments in the fetch request.
 
-```javascript
+The useEffect hook with an empty array to simulate componentDidMount()
 
+```javascript
+import { Card, Button } from 'react-bootstrap'
 ```
 
-# Header
+```javascript
+function readApartments () {
+  fetch("/apartments")
+  .then(request => request.json())
+  .then(payload => setApartments({apartments: payload}))
+  .catch(err => console.log(err))
+}
+
+useEffect(() => {
+  readApartments()
+},[])
+```
+
+# Show - unprotected
+unlike cat tinder, I wasn't able to pass down apartments like i did to the index page. It wouldn't let me use apartments={apartments} twice. I ended up doing a fetch request
+```javascript
+  let [apartment, setApartment] =useState([])
+  let { id } = useParams()
+  function showApartment (id) {
+    fetch(`/apartments/${id}`)
+    .then(request => request.json())
+    .then(payload => setApartment(payload))
+    .catch(err => console.log(err))
+  }
+  useEffect(() => {
+    showApartment(id)
+  },[])
+```
+
+
+# Header/Navigation
 Tests should cover cases when user is signed in or logged out
+Header can conditionally render sign in, sign out, create buttons depending on login status.
+Using react-bootstrap, used Navbar and NavbarDropdown to allow for easy routing.
+NavBrand should route back to home
+```javascript
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+```
+## This part fall under protected index - however, it will be incorporated into the header to create better functionality for the user.
+The header also holds a lot of user data so we can use it to create conditional renders with off canvas listings.
+
 
 
 
@@ -95,7 +136,7 @@ config.sign_out_via = :get
 
 File added in app/views/home called index.html.erb
 **app/views/home/index.html.erb**
-```javascript
+```ruby
 <%= react_component 'App', {
   logged_in: user_signed_in?,
   current_user: current_user,
