@@ -11,6 +11,7 @@ class ApartmentsController < ApplicationController
   # GET /apartments/1
   # GET /apartments/1.json
   def show
+    render json: @apartment
   end
 
   # POST /apartments
