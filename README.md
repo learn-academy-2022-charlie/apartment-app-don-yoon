@@ -44,6 +44,10 @@ create the fetch request, unlike cat-tinder where we had to use localhost, this 
 
 ```
 
+# Header
+Tests should cover cases when user is signed in or logged out
+
+
 
 
 # Apartment App
