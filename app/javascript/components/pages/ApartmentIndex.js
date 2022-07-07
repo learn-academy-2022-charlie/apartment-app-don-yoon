@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap'
 export default function ApartmentIndex(props) {
+  
   let { apartments } = props.apartments
   // because apartments is in another object, i think due to belonging to user, we have to destructure more
   console.log("apartments:", apartments)
@@ -15,8 +16,10 @@ export default function ApartmentIndex(props) {
           <Card.Body>
             <Card.Title> {apartmentObj.street}, {apartmentObj.city}, {apartmentObj.state} </Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+              <p>Price: {apartmentObj.price }</p>
+              <p>Bedrooms: {apartmentObj.bedrooms }</p>
+              <p>Bathrooms: {apartmentObj.bathrooms}</p>
+              <p>Pets: {apartmentObj.pets}</p>
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>
