@@ -11,7 +11,6 @@ export default function Header(props) {
     sign_in_route,
     sign_out_route,
     apartments,
-    readApartments
   } = props
   
   console.log("logged_in:", logged_in)
@@ -28,13 +27,15 @@ export default function Header(props) {
   return (
     <>
       
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
 
-              <Navbar.Brand href="/"> Apartment App </Navbar.Brand>
+              <Navbar.Brand href="/"> MVP </Navbar.Brand>
               <NavDropdown id="nav-drop" title="Pages">
                 <NavDropdown.Item href="/apartmentindex"> Index </NavDropdown.Item>
+                {logged_in &&
                 <NavDropdown.Item href="/apartmentnew"> New </NavDropdown.Item>
+                }
               </NavDropdown>
 
               {logged_in &&
@@ -69,7 +70,7 @@ export default function Header(props) {
                     <Offcanvas.Title> {current_user.email} Listings </Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    {
+                    {apartments &&
                     apartments.filter(apartmentObj => apartmentObj.user_id === current_user.id).map((apartmentObj, index) => {
                         return(
                         <Card id="indexCard" key={index} style={{ width: '18rem' }}>
@@ -79,7 +80,7 @@ export default function Header(props) {
                             <Card.Text>
                             </Card.Text>
                               <Button href={`/apartmentshow/${apartmentObj.id}`} variant="primary">More Info</Button>
-                              <Button variant="primary">Edit</Button>
+                              <Button href={`/apartmentedit/${apartmentObj.id}`} variant="primary">Edit</Button>
                               <Button variant="primary">Delete</Button>
                           </Card.Body>
                         </Card>

@@ -114,18 +114,18 @@ RSpec.describe "/apartments", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {
         {
-          street: "Test Street 11",
-          city: "Test City",
-          state: "CA",
-          manager: "Test Manager1",
-          email: "test1email@email.com", 
-          price: 100000, 
-          bedrooms: 3, 
-          bathrooms: 2, 
-          pets: "Allowed",
-          image: "https://images.unsplash.com/photo-1605283176568-9b41fde3672e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-          user_id:1
-        }
+      street: "Test Street 1",
+      city: "Test City",
+      state: "CA",
+      manager: "Test Manager1",
+      email: "test1email@email.com", 
+      price: 100000, 
+      bedrooms: 3, 
+      bathrooms: 2, 
+      pets: "Allowed",
+      image: "https://images.unsplash.com/photo-1605283176568-9b41fde3672e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      user_id:1
+    }
       }
 
       it "updates the requested apartment" do

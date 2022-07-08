@@ -10,7 +10,7 @@ import ApartmentNew from './ApartmentNew'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe("When ApartmentNew renders", () => {
-  it("displays a heading", () => {
+  it("displays a form", () => {
     let props = {current_user :{ id: 1 }}
     const apartmentNew = shallow(<ApartmentNew {...props}/>)
     const apartmentNewForm = apartmentNew.find("Form")

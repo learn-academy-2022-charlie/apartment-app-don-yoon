@@ -42,7 +42,7 @@ export default function ApartmentShow(props) {
               <Button href="/" variant="primary">Home</Button>
               {logged_in && current_user.id === apartment.user_id &&
               <>
-              <Button variant="primary">Edit</Button>
+              <Button href={`/apartmentedit/${apartment.id}`} variant="primary">Edit</Button>
               <Button variant="primary">Delete</Button>
               </>
               }
