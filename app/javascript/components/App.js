@@ -18,11 +18,15 @@ export default function App(props) {
 let [apartments, setApartments] = useState([])
 let [hasError, setErrors] = useState(false)
 
-function readApartments () {
-  fetch("/apartments")
-  .then(request => request.json())
+async function readApartments () {
+  const response = await fetch("/apartments")
+  response
+  .json()
   .then(payload => setApartments(payload))
-  .catch(err => console.log(err))
+  .catch(err => {
+    setErrors(err)
+    console.log(hasError)
+  })
 }
 function createListing (newListing) {
   fetch("/apartments",
@@ -40,6 +44,24 @@ function createListing (newListing) {
    })
    alert("New listing added") 
  }
+ function editApartment (editListing, id) {
+  fetch(`/apartments/${id}`,
+     {
+       body: JSON.stringify(editListing),
+       headers: {
+            Accept: "application/json",
+            "Content-Type":"application/json"},
+       method: "PATCH",      
+     }
+   )
+   .then(response => response.json())
+   .then(payload => setApartments(readApartments()))
+   .catch(err => {
+     setErrors(err)
+     console.log(hasError)
+   }) 
+ }
+
 useEffect(() => {
   readApartments()
 },[])
@@ -47,14 +69,14 @@ useEffect(() => {
 
 return (
         <Router>
-          <Header {...props} readApartments={readApartments} apartments={apartments} />
+          <Header {...props} apartments={apartments} />
           <div className='app-container'>
             <Routes>
               <Route exact path="/" element={<Home/>} />
               <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
               <Route path="/apartmentshow/:id" element={<ApartmentShow {...props}/>} />
               <Route path="/apartmentnew" element={<ApartmentNew {...props} apartments={apartments} createListing={createListing} readApartments={readApartments}/>} />
-              <Route path="/apartmentedit/:id" element={<ApartmentEdit/>} />
+              <Route path="/apartmentedit/:id" element={<ApartmentEdit {...props} editApartment={editApartment} apartment={apartments}/>} />
               <Route element={<NotFound/>} />
             </Routes>
           </div>
