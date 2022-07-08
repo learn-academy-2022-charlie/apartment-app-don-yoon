@@ -74,6 +74,8 @@ unlike cat tinder, I wasn't able to pass down apartments like i did to the index
     showApartment(id)
   },[])
 ```
+# MODEL SPEC TESTING
+make sure to cover validation testing
 
 
 # Header/Navigation

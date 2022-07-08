@@ -17,11 +17,37 @@ RSpec.describe "/apartments", type: :request do
   # Apartment. As you add validations to Apartment, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    # skip("Add a hash of attributes valid for your model")
+    {
+      street: "Test Street 1",
+      city: "Test City",
+      state: "CA",
+      manager: "Test Manager1",
+      email: "test1email@email.com", 
+      price: 100000, 
+      bedrooms: 3, 
+      bathrooms: 2, 
+      pets: "Allowed",
+      image: "https://images.unsplash.com/photo-1605283176568-9b41fde3672e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      user_id:1
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    # skip("Add a hash of attributes invalid for your model")
+    {
+      street: nil,
+      city: nil,
+      state: nil,
+      manager: nil,
+      email: nil, 
+      price: nil, 
+      bedrooms: nil, 
+      bathrooms: nil, 
+      pets: nil,
+      image: nil,
+      user_id:nil
+    }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -31,6 +57,8 @@ RSpec.describe "/apartments", type: :request do
   let(:valid_headers) {
     {}
   }
+  
+  User.create(email: 'test@example.com', password: '12345678', password_confirmation: '12345678')
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -85,7 +113,19 @@ RSpec.describe "/apartments", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          street: "Test Street 11",
+          city: "Test City",
+          state: "CA",
+          manager: "Test Manager1",
+          email: "test1email@email.com", 
+          price: 100000, 
+          bedrooms: 3, 
+          bathrooms: 2, 
+          pets: "Allowed",
+          image: "https://images.unsplash.com/photo-1605283176568-9b41fde3672e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+          user_id:1
+        }
       }
 
       it "updates the requested apartment" do

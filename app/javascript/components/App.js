@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react'
 
 export default function App(props) {
 let [apartments, setApartments] = useState([])
+let [hasError, setErrors] = useState(false)
 
 function readApartments () {
   fetch("/apartments")
@@ -23,6 +24,22 @@ function readApartments () {
   .then(payload => setApartments(payload))
   .catch(err => console.log(err))
 }
+function createListing (newListing) {
+  fetch("/apartments",
+     {
+       body: JSON.stringify(newListing),
+       headers: {"Content-Type":"application/json"},
+       method: "POST",   
+     }
+   )
+   .then(response => response.json())
+   .then(payload => setApartments(readApartments()))
+   .catch(err => {
+     setErrors(err)
+     console.log(hasError)
+   })
+   alert("New listing added") 
+ }
 useEffect(() => {
   readApartments()
 },[])
@@ -30,13 +47,13 @@ useEffect(() => {
 
 return (
         <Router>
-          <Header {...props} apartments={apartments} />
+          <Header {...props} readApartments={readApartments} apartments={apartments} />
           <div className='app-container'>
             <Routes>
               <Route exact path="/" element={<Home/>} />
               <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
               <Route path="/apartmentshow/:id" element={<ApartmentShow {...props}/>} />
-              <Route path="/apartmentnew" element={<ApartmentNew/>} />
+              <Route path="/apartmentnew" element={<ApartmentNew {...props} apartments={apartments} createListing={createListing} readApartments={readApartments}/>} />
               <Route path="/apartmentedit/:id" element={<ApartmentEdit/>} />
               <Route element={<NotFound/>} />
             </Routes>
