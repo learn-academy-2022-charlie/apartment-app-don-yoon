@@ -1,4 +1,5 @@
 class ApartmentsController < ApplicationController
+  
   before_action :set_apartment, only: %i[ show update destroy ]
 
   # GET /apartments
