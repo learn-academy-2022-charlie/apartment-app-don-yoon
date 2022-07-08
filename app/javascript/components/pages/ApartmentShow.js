@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Container, Card, Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 
 export default function ApartmentShow(props) {
-  let [apartment, setApartment] =useState([])
+  let [apartment, setApartment] =React.useState([])
   let { id } = useParams()
 
   let {
     logged_in,
-    current_user
+    current_user,
+    deleteListing
   } = props
 
   console.log("show:", logged_in)
@@ -18,10 +19,15 @@ export default function ApartmentShow(props) {
     .then(payload => setApartment(payload))
     .catch(err => console.log(err))
   }
+
+  const handleClick = (id) => {
+    deleteListing(id)
+    location.reload()
+  }
   useEffect(() => {
     showApartment(id)
   },[])
-  // console.log(logged_in)
+   console.log(apartment)
   return (
     <>
       <div className="show-container">
@@ -42,8 +48,8 @@ export default function ApartmentShow(props) {
               <Button href="/" variant="primary">Home</Button>
               {logged_in && current_user.id === apartment.user_id &&
               <>
-              <Button href={`/apartmentedit/${apartment.id}`} variant="primary">Edit</Button>
-              <Button variant="primary">Delete</Button>
+              <Button id="edit" href={`/apartmentedit/${apartment.id}`} variant="primary">Edit</Button>
+              <Button id="delete" onClick={()=> handleClick(apartment.id)}variant="primary">Delete</Button>
               </>
               }
             

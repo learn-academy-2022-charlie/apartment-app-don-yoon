@@ -11,6 +11,7 @@ export default function Header(props) {
     sign_in_route,
     sign_out_route,
     apartments,
+    deleteListing
   } = props
   
   console.log("logged_in:", logged_in)
@@ -23,6 +24,10 @@ export default function Header(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClick = (id) => {
+    deleteListing(id)
+    location.reload()
+  }
 
   return (
     <>
@@ -81,7 +86,7 @@ export default function Header(props) {
                             </Card.Text>
                               <Button href={`/apartmentshow/${apartmentObj.id}`} variant="primary">More Info</Button>
                               <Button href={`/apartmentedit/${apartmentObj.id}`} variant="primary">Edit</Button>
-                              <Button variant="primary">Delete</Button>
+                              <Button onClick={()=>handleClick(apartmentObj.id)}variant="primary">Delete</Button>
                           </Card.Body>
                         </Card>
                       )

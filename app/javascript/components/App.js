@@ -18,6 +18,11 @@ export default function App(props) {
 let [apartments, setApartments] = useState([])
 let [hasError, setErrors] = useState(false)
 
+useEffect(() => {
+  readApartments()
+},[])
+
+
 async function readApartments () {
   const response = await fetch("/apartments")
   response
@@ -61,20 +66,26 @@ function createListing (newListing) {
      console.log(hasError)
    }) 
  }
-
-useEffect(() => {
-  readApartments()
-},[])
+ function deleteListing(id) {
+  fetch(`/apartments/${id}`, {
+    method: "DELETE"
+  }).then( result => {
+    result.json().then( response => {
+      console.warn(response)
+    })
+  })
+  
+}
 
 
 return (
         <Router>
-          <Header {...props} apartments={apartments} />
+          <Header {...props} apartments={apartments} deleteListing={deleteListing}/>
           <div className='app-container'>
             <Routes>
               <Route exact path="/" element={<Home/>} />
               <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments}/>} />
-              <Route path="/apartmentshow/:id" element={<ApartmentShow {...props}/>} />
+              <Route path="/apartmentshow/:id" element={<ApartmentShow {...props} deleteListing={deleteListing}/>} />
               <Route path="/apartmentnew" element={<ApartmentNew {...props} apartments={apartments} createListing={createListing} readApartments={readApartments}/>} />
               <Route path="/apartmentedit/:id" element={<ApartmentEdit {...props} editApartment={editApartment} apartment={apartments}/>} />
               <Route element={<NotFound/>} />
